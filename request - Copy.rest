@@ -1,0 +1,135 @@
+
+### GET COURSE
+GET http://localhost:3000/api/v1/course
+### GET COURSE BY ID
+GET http://localhost:3000/api/v1/course/9ed7480c-22b0-4985-9858-7b2a50b045b3
+### POST COURSE 
+POST http://localhost:3000/api/v1/course
+Content-Type: application/json
+
+{ 
+  "title": "Learn Python: The Complete Python Programming Course",
+  "userId": "qGcx8nqGILcvix8ZeWo6qjW6GLo2"
+}
+### UPDATE COURSE
+PUT http://localhost:3000/api/v1/course/e0c85e86-d906-4dbc-8b2e-0fafb1f51b5b
+Content-Type: application/json
+
+{ 
+  "price": 150 
+}
+
+### UPDATE CATEGORY COURSE
+PUT http://localhost:3000/api/v1/course/category/5a00b55e-da82-4359-a7db-09cd975c58fa
+Content-Type: application/json
+
+{ 
+  "name": "React js"
+}
+
+###DELETE COURSE
+
+DELETE http://localhost:3000/api/v1/course/2259293e-7ef5-452c-874f-3970e6b35a87
+
+### get category
+GET http://localhost:3000/api/v1/category
+### get category by id
+GET http://localhost:3000/api/v1/category/6708441a-586e-4df9-b44e-f306ce5185ec
+
+### post category
+POST http://localhost:3000/api/v1/category
+Content-Type: application/json
+
+{
+  "name": "React Js Epress Arduino"
+}
+### UPDATE 
+PUT http://localhost:3000/api/v1/category/6708441a-586e-4df9-b44e-f306ce5185ec
+Content-Type: application/json
+
+{
+  "title": "MQTT ARDUINO"
+}
+
+### get Purchase 
+GET http://localhost:3000/api/v1/purchase 
+
+### get purchase by Id
+GET http://localhost:3000/api/v1/purchase/qGcx8nqGILcvix8ZeWo6qjW6GLo2 
+
+###
+POST http://localhost:3000/api/v1/purchase 
+Content-Type: application/json
+
+{
+  "userId": "qGcx8nqGILcvix8ZeWo6qjW6GLo2",
+  "courseId": "618fb254-9c44-4373-a706-716d6c5caaba",
+  "position": 1
+}
+
+###
+DELETE http://localhost:3000/api/v1/purchase/8347f718-7004-4392-a1b9-eb1e0d275c9b
+
+
+### get cart
+GET http://localhost:3000/api/v1/cart
+
+### get cart by id 
+GET http://localhost:3000/api/v1/cart/qGcx8nqGILcvix8ZeWo6qjW6GLo2
+
+### post cart 
+POST http://localhost:3000/api/v1/cart
+Content-Type: application/json 
+
+{
+  "title": "qGcx8nqGILcvix8ZeWo6qjW6GLo2",
+  "course_Id": "87dbe0d2-9b1b-4dff-8693-0e69f784c2a8",
+  "positions": 1
+}
+
+### getChapter 
+GET http://localhost:3000/api/v1/chapter
+
+### getChapterById 
+GET http://localhost:3000/api/v1/chapter
+
+### updateChapter 
+PUT http://localhost:3000/api/v1/chapter/7521741a-180c-41d2-9872-af919834ec5f
+Content-Type: application/json
+
+{
+  "title": "Introduction to Chapter",
+  "position": 1
+}
+
+###
+PUT http://localhost:3000/api/v1/courses/chapters/reorder
+Content-Type: application/json
+
+
+{ 
+  "list":[
+    {
+      "id": "f7b39409-2265-4c27-b898-dcaebc29a1ad",
+      "position": 0
+    },
+    {
+      "id": "bc922f5d-1314-4c33-be9d-5015414f7be8",
+      "position": 1
+    }
+  ]
+}
+
+### createChapter 
+POST http://localhost:3000/api/v1/chapter
+Content-Type: application/json
+
+{
+  "title": "Introduction to Chapter",
+  "courseId": "87dbe0d2-9b1b-4dff-8693-0e69f784c2a8",
+  "position": 1
+}
+
+
+
+

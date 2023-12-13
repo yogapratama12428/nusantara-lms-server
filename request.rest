@@ -1,0 +1,178 @@
+
+### 
+GET http://localhost:3000/test
+Authorization: Bearer abcdefghjklm
+### GET COURSE
+GET http://localhost:3000/api/v1/course
+### GET COURSE BY ID
+GET http://localhost:3000/api/v1/course/5540df8d-1b93-4165-9505-4afcfc469d69
+### POST COURSE 
+POST http://localhost:3000/api/v1/course
+Content-Type: application/json
+
+{ 
+  "title": "Learn Python: The Complete Python Programming Course",
+  "userId": "qGcx8nqGILcvix8ZeWo6qjW6GLo2"
+}
+### UPDATE COURSE
+PUT http://localhost:3000/api/v1/course/e0c85e86-d906-4dbc-8b2e-0fafb1f51b5b
+Content-Type: application/json
+
+{ 
+  "price": 150 
+}
+
+### UPDATE CATEGORY COURSE
+PUT http://localhost:3000/api/v1/course/category/5a00b55e-da82-4359-a7db-09cd975c58fa
+Content-Type: application/json
+
+{ 
+  "name": "React js"
+}
+
+###DELETE COURSE
+
+DELETE http://localhost:3000/api/v1/course/2259293e-7ef5-452c-874f-3970e6b35a87
+
+### get category
+GET http://localhost:3000/api/v1/category
+### get category by id
+GET http://localhost:3000/api/v1/category/6708441a-586e-4df9-b44e-f306ce5185ec
+
+### post category
+POST http://localhost:3000/api/v1/category
+Content-Type: application/json
+
+{
+  "name": "React Js Epress Arduino"
+}
+### UPDATE 
+PUT http://localhost:3000/api/v1/category/6708441a-586e-4df9-b44e-f306ce5185ec
+Content-Type: application/json
+
+{
+  "title": "MQTT ARDUINO"
+}
+
+### get Purchase 
+GET http://localhost:3000/api/v1/purchase/qGcx8nqGILcvix8ZeWo6qjW6GLo2 
+
+### get purchase by Id
+GET http://localhost:3000/api/v1/purchase/qGcx8nqGILcvix8ZeWo6qjW6GLo2
+
+###
+POST http://localhost:3000/api/v1/purchase 
+Content-Type: application/json
+
+{
+  "userId": "qGcx8nqGILcvix8ZeWo6qjW6GLo2",
+  "courseId": "5540df8d-1b93-4165-9505-4afcfc469d69"
+}
+
+###
+DELETE http://localhost:3000/api/v1/purchase/8347f718-7004-4392-a1b9-eb1e0d275c9b
+
+
+### get cart
+GET http://localhost:3000/api/v1/cart
+
+### get cart by id 
+GET http://localhost:3000/api/v1/cart/qGcx8nqGILcvix8ZeWo6qjW6GLo2
+
+### post cart 
+POST http://localhost:3000/api/v1/cart
+Content-Type: application/json 
+
+{
+  "title": "qGcx8nqGILcvix8ZeWo6qjW6GLo2",
+  "course_Id": "87dbe0d2-9b1b-4dff-8693-0e69f784c2a8",
+  "positions": 1
+}
+
+### getChapter 
+GET http://localhost:3000/api/v1/chapter
+
+### getChapterById 
+GET http://localhost:3000/api/v1/chapter/57ad3075-2689-4612-97eb-3a20d6bb9e4e
+
+### updateChapter 
+PUT http://localhost:3000/api/v1/chapter/57ad3075-2689-4612-97eb-3a20d6bb9e4e
+Content-Type: application/json
+
+{
+  "video": "Introduction to Chapter1"
+}
+
+###
+PUT http://localhost:3000/api/v1/courses/chapters/reorder
+Content-Type: application/json
+
+
+{ 
+  "list":[
+    {
+      "id": "f7b39409-2265-4c27-b898-dcaebc29a1ad",
+      "position": 0
+    },
+    {
+      "id": "bc922f5d-1314-4c33-be9d-5015414f7be8",
+      "position": 1
+    }
+  ]
+}
+
+### createChapter 
+POST http://localhost:3000/api/v1/chapter
+Content-Type: application/json
+
+{
+  "title": "Introduction to Chapter",
+  "courseId": "87dbe0d2-9b1b-4dff-8693-0e69f784c2a8",
+  "position": 1
+}
+
+### update attachments 
+POST http://localhost:3000/api/v1/attachment 
+Content-Type: application/json
+
+{
+  "name": "Repository Github",
+  "url": "www.github.com",
+  "courseId": "4771c1db-0e68-4288-809f-b420c4e7af23"
+}
+
+
+### payment 
+POST http://localhost:3000/api/v1/checkout 
+Content-Type: application/json 
+
+{
+  "purchaseId": "1a2s3d4f5g6h7j8k9l",
+  "price": 150000
+}
+
+
+### user
+GET http://localhost:3000/api/v1/users
+
+###
+### get cart
+GET http://localhost:3000/api/v1/cart 
+
+### get cart
+GET http://localhost:3000/api/v1/cart/qGcx8nqGILcvix8ZeWo6qjW6GLo2
+
+
+### create cart 
+POST http://localhost:3000/api/v1/cart 
+Content-Type: application/json 
+
+{
+   "userId": "qGcx8nqGILcvix8ZeWo6qjW6GLo2",
+   "courseId": "87dbe0d2-9b1b-4dff-8693-0e69f784c2a8",
+   "description": "Build GPS Tracker App : Fullstack Developer Control and monitoring your devices ",
+   "price": 100000
+}
+
+###
+DELETE http://localhost:3000/api/v1/cart/da061c4e-a2f4-43d1-a459-3541b7b645ea
