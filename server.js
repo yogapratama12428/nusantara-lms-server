@@ -10,6 +10,8 @@ import ChapterRoute from "./routes/ChapterRoute.js"
 import AttachmentRoute from "./routes/AttachmentRoute.js"
 import PaymentRoute from "./routes/PaymentRoute.js"
 import UserRoute from "./routes/UserRoute.js"
+import CaptureRoute from "./routes/CaptureRoute.js"
+import PointRoute from "./routes/PointRoute.js"
 import { verifyToken } from "./middleware/verifyToken.js";
 import helmet from "helmet";
 
@@ -32,6 +34,8 @@ app.use(ChapterRoute);
 app.use(AttachmentRoute);
 app.use(PaymentRoute );
 app.use(UserRoute);
+app.use(CaptureRoute);
+app.use(PointRoute);
 
 app.get('/test', verifyToken, (req, res) => {
   res.status(200).json(`hello I'm from port :` + PORT);

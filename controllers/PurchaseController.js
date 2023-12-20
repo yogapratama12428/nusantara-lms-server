@@ -7,12 +7,12 @@ export const getPurchase = async (req, res) => {
     try {
         const response = await prisma.purchase.findMany({
             include: {
-                course: true
+                courses: true
             }
         })
         res.status(200).json(response)
     } catch (error) {
-        res.status(404).json({ error: 'Not Found' })
+        res.status(404).json({ error: error })
     }
 }
 
@@ -24,7 +24,7 @@ export const getPurchaseById = async (req, res) => {
                 userId
             },
             include: {
-                course: true
+                courses: true
             }
         })
         res.status(200).json(response)

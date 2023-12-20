@@ -1,8 +1,10 @@
 
 ### GET COURSE
-GET http://localhost:3000/api/v1/course
+GET https://drab-gold-rhinoceros-hose.cyclic.app/api/v1/course
+Authorization: Bearer abcdefghjklm
 ### GET COURSE BY ID
-GET http://localhost:3000/api/v1/course/9ed7480c-22b0-4985-9858-7b2a50b045b3
+GET http://localhost:3000/api/v1/course/168d8eef-223c-4f49-a507-c4aa2b8438a9
+Authorization: Bearer abcdefghjklm
 ### POST COURSE 
 POST http://localhost:3000/api/v1/course
 Content-Type: application/json
@@ -54,21 +56,21 @@ Content-Type: application/json
 ### get Purchase 
 GET http://localhost:3000/api/v1/purchase 
 
+
 ### get purchase by Id
-GET http://localhost:3000/api/v1/purchase/qGcx8nqGILcvix8ZeWo6qjW6GLo2 
+GET http://localhost:3000/api/v1/purchase/qGcx8nqGILcvix8ZeWo6qjW6GLo2
 
 ###
-POST http://localhost:3000/api/v1/purchase 
+POST https://drab-gold-rhinoceros-hose.cyclic.app/api/v1/purchase 
 Content-Type: application/json
 
 {
   "userId": "qGcx8nqGILcvix8ZeWo6qjW6GLo2",
-  "courseId": "618fb254-9c44-4373-a706-716d6c5caaba",
-  "position": 1
+  "courseId": "699db0c3-dadd-40d0-991f-d8f5b5ac48f5"
 }
 
 ###
-DELETE http://localhost:3000/api/v1/purchase/8347f718-7004-4392-a1b9-eb1e0d275c9b
+DELETE http://localhost:3000/api/v1/purchase/11fb7fb7-a491-42d7-968e-8102f88470c7
 
 
 ### get cart
@@ -84,7 +86,6 @@ Content-Type: application/json
 {
   "title": "qGcx8nqGILcvix8ZeWo6qjW6GLo2",
   "course_Id": "87dbe0d2-9b1b-4dff-8693-0e69f784c2a8",
-  "positions": 1
 }
 
 ### getChapter 
@@ -130,6 +131,6 @@ Content-Type: application/json
   "position": 1
 }
 
-
+### 
 
 
