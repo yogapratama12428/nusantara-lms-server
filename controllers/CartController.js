@@ -28,7 +28,7 @@ export const getCartById = async (req, res) => {
 }
 
 export const createCart = async (req, res) => {
-    const { userId, courseId, imageUrl, price, checkoutToken, checkoutlink, description } = req.body 
+    const { userId, courseId, imageUrl, price, description } = req.body 
     
     let transactionToken = ""
     let transactionRedirectUrl = ""

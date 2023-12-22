@@ -6,7 +6,8 @@ Authorization: Bearer abcdefghjklm
 GET http://localhost:3000/api/v1/course
 Authorization: Bearer abcdefghjklm
 ### GET COURSE BY ID
-GET http://localhost:3000/api/v1/course/5540df8d-1b93-4165-9505-4afcfc469d69
+GET http://localhost:3000/api/v1/course/168d8eef-223c-4f49-a507-c4aa2b8438a9
+Authorization: Bearer abcdefghjklm
 ### POST COURSE 
 POST http://localhost:3000/api/v1/course
 Content-Type: application/json

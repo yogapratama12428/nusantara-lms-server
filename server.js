@@ -12,6 +12,10 @@ import PaymentRoute from "./routes/PaymentRoute.js"
 import UserRoute from "./routes/UserRoute.js"
 import CaptureRoute from "./routes/CaptureRoute.js"
 import PointRoute from "./routes/PointRoute.js"
+import VidiosRoute from "./routes/VidiosRoute.js"
+import ToolRoute from "./routes/ToolRoute.js"
+import InstrumentRoute from "./routes/IntrumentRoute.js"
+
 import { verifyToken } from "./middleware/verifyToken.js";
 import helmet from "helmet";
 
@@ -36,6 +40,9 @@ app.use(PaymentRoute );
 app.use(UserRoute);
 app.use(CaptureRoute);
 app.use(PointRoute);
+app.use(VidiosRoute);
+app.use(ToolRoute);
+app.use(InstrumentRoute);
 
 app.get('/test', verifyToken, (req, res) => {
   res.status(200).json(`hello I'm from port :` + PORT);

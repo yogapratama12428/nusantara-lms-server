@@ -24,8 +24,10 @@ export const getCourseById = async (req, res) => {
                 purchases: true,
                 attachments: true,
                 captures: true,
-                points: true
-            }
+                points: true,
+                tools: true,
+            },
+            
 
         })
         res.status(200).json(response)
@@ -91,7 +93,7 @@ export const updateCategoryCourse = async (req, res) => {
 
 
 export const updateCourse = async (req, res) => {
-    const { userId, title, description, imageUrl, price, isPublished, isFree, fulltext  } = req.body
+    const { userId, title, description, imageUrl, price, isPublished, isFree, fulltext, videoUrl  } = req.body
     const { id } = req.params
     
     try {
@@ -107,7 +109,8 @@ export const updateCourse = async (req, res) => {
                 price, 
                 isPublished,
                 isFree,
-                fulltext
+                fulltext,
+                videoUrl
            }
         })  
         res.status(201).json(response)

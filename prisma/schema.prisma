@@ -20,6 +20,15 @@ model User {
   updatedAt DateTime @updatedAt
 }
 
+model Instrument { 
+  id String @id @default(uuid())
+  title String? 
+  imageUrl String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 model Course {
   id String @id @default(uuid())
   userId String
@@ -27,6 +36,7 @@ model Course {
   description String? @db.Text
   fulltext String? @db.Text
   imageUrl String? @db.Text
+  videoUrl String? @db.Text
   price Float?
   isPublished Boolean @default(false)
   isFree Boolean @default(false)
@@ -38,7 +48,8 @@ model Course {
   attachments Attachment[]
   purchases Purchase[]
   captures Capture[]
-  points Point []
+  points Point[]
+  tools Tool[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -46,6 +57,19 @@ model Course {
   @@index([categoryId])
 }
 
+model Tool {
+  id String @id @default(uuid())
+  title String?
+  imageUrl String?
+
+  courseId String?
+  course Course? @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([courseId])
+}
 model Point {
   id String @id @default(uuid())
   title String?
@@ -98,6 +122,7 @@ model Chapter {
   description String? @db.Text
   fulltext String? @db.Text
   videoUrl String? @db.Text
+  
   position Int
   isPublished Boolean @default(false)
   isFree Boolean @default(false)
@@ -106,6 +131,7 @@ model Chapter {
   course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
 
   userProgress UserProgress[]
+  vidios Vidio[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -113,6 +139,20 @@ model Chapter {
   @@index([courseId])
 }
 
+
+model Vidio {
+  id String @id @default(uuid())
+  title String?
+  url String?
+
+  chapterId String? 
+  chapter Chapter? @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([chapterId])
+}
 model UserProgress {
   id String @id @default(uuid())
   userId String
@@ -148,9 +188,9 @@ model Cart {
   userId String? 
   courseId String? 
   imageUrl String?
-  description String?
-  checkoutToken String?
-  checkoutlink String?
+  title String?
+  checkoutToken String? @db.Text
+  checkoutlink String? @db.Text
   price Int?
   
   createdAt DateTime @default(now())

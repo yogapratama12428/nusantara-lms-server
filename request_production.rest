@@ -84,15 +84,18 @@ POST http://localhost:3000/api/v1/cart
 Content-Type: application/json 
 
 {
-  "title": "qGcx8nqGILcvix8ZeWo6qjW6GLo2",
-  "course_Id": "87dbe0d2-9b1b-4dff-8693-0e69f784c2a8",
+   "userId": "qGcx8nqGILcvix8ZeWo6qjW6GLo2",
+   "courseId": "168d8eef-223c-4f49-a507-c4aa2b8438a9",
+   "imageUrl": "https://utfs.io/f/36976170-aea3-46af-ac03-363022d206b0-6v185r.png",
+   "price": "100000",
+   "title": "Build an Application GPS Tracker Platform"
 }
 
 ### getChapter 
 GET http://localhost:3000/api/v1/chapter
 
 ### getChapterById 
-GET http://localhost:3000/api/v1/chapter
+GET http://localhost:3000/api/v1/chapter/4aebbfed-d356-4789-8542-1752ec8b9d9d
 
 ### updateChapter 
 PUT http://localhost:3000/api/v1/chapter/7521741a-180c-41d2-9872-af919834ec5f
@@ -132,5 +135,40 @@ Content-Type: application/json
 }
 
 ### 
+GET http://localhost:3000/api/v1/vidios
+
+###
+POST http://localhost:3000/api/v1/vidios
+Content-Type: application/json
+
+{
+  "title": "Void Setup",
+  "url": "https://www.youtube.com/watch?v=za3gi_XYyBg",
+  "chapterId": "4aebbfed-d356-4789-8542-1752ec8b9d9d"
+}
+
+### UPDATE
+PUT http://localhost:3000/api/v1/vidios/22e39e4f-ac2a-4712-8ce7-b17853303350
+Content-Type: application/json
+
+{
+  "title": "Arduino Uno",
+  "url": "youtube.com"
+}
+
+### DELETE 
+DELETE http://localhost:3000/api/v1/vidios/7c15aadf-1f23-4b2a-b11f-5bd5aa8c9a43
 
 
+
+###instrument 
+POST http://localhost:3000/api/v1/instrument
+Content-Type: application/json
+
+{
+  "title": "Node JS",
+  "imageUrl": "https://th.bing.com/th/id/OIP.w7OvKMnUj-M66Bs1kjwzewHaCx?w=264&h=180&c=7&r=0&o=5&pid=1.7"
+}
+
+### 
+GET http://localhost:3000/api/v1/instrument

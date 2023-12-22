@@ -18,6 +18,9 @@ export const getChapterById = async (req, res) => {
         const response = await prisma.chapter.findUnique({
             where: {
                 id
+            },
+            include: {
+                vidios: true
             }
         })
         res.status(200).json(response)
