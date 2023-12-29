@@ -20,15 +20,17 @@ export const getCourseById = async (req, res) => {
                 id: id
             },
             include: {
-                chapters: true,
+                chapters: {
+                    orderBy: {
+                        createdAt: 'asc'
+                    }
+                },
                 purchases: true,
                 attachments: true,
                 captures: true,
                 points: true,
                 tools: true,
             },
-            
-
         })
         res.status(200).json(response)
     } catch (error) {

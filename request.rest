@@ -11,6 +11,7 @@ Authorization: Bearer abcdefghjklm
 ### POST COURSE 
 POST http://localhost:3000/api/v1/course
 Content-Type: application/json
+Authorization: Bearer abcdefghjklm
 
 { 
   "title": "Learn Python: The Complete Python Programming Course",
@@ -92,7 +93,8 @@ Content-Type: application/json
 }
 
 ### getChapter 
-GET http://localhost:3000/api/v1/chapter
+GET http://localhost:3000/api/v1/chapter/4aebbfed-d356-4789-8542-1752ec8b9d9d
+Authorization: Bearer abcdefghjklm
 
 ### getChapterById 
 GET http://localhost:3000/api/v1/chapter/57ad3075-2689-4612-97eb-3a20d6bb9e4e
@@ -159,7 +161,7 @@ GET http://localhost:3000/api/v1/users
 
 ###
 ### get cart
-GET http://localhost:3000/api/v1/cart 
+GET http://localhost:3000/api/v1/vidios
 
 ### get cart
 GET http://localhost:3000/api/v1/cart/qGcx8nqGILcvix8ZeWo6qjW6GLo2
@@ -167,14 +169,20 @@ GET http://localhost:3000/api/v1/cart/qGcx8nqGILcvix8ZeWo6qjW6GLo2
 
 ### create cart 
 POST http://localhost:3000/api/v1/cart 
+Authorization: Bearer abcdefghjklm
 Content-Type: application/json 
 
 {
    "userId": "qGcx8nqGILcvix8ZeWo6qjW6GLo2",
-   "courseId": "87dbe0d2-9b1b-4dff-8693-0e69f784c2a8",
-   "description": "Build GPS Tracker App : Fullstack Developer Control and monitoring your devices ",
+   "courseId": "168d8eef-223c-4f49-a507-c4aa2b8438a9",
+   "title": "Build GPS Tracker App : Fullstack Developer Control and monitoring your devices ",
    "price": 100000
 }
 
 ###
 DELETE http://localhost:3000/api/v1/cart/da061c4e-a2f4-43d1-a459-3541b7b645ea
+
+
+###
+GET http://localhost:3000/api/v1/chapter/0571f77f-7908-4797-8de7-66622e2aac3f
+Authorization: Bearer abcdefghjklm

@@ -27,14 +27,15 @@ export const getVidiosById = async (req, res) => {
 }
 
 export const createVidios = async (req, res ) => {
-    const { title, url, chapterId } = req.body
+    const { title, url, chapterId, time } = req.body
 
     try {
         await prisma.vidio.create({
             data: {
                 title,
                 url,
-                chapterId
+                chapterId,
+                time
             }
         })
         res.status(201).json({'msg' : "title Created successfully"})
@@ -45,7 +46,7 @@ export const createVidios = async (req, res ) => {
 
 export const updateVidios = async (req, res) => {
     const { id } = req.params
-    const { title, url } = req.body
+    const { title, url, time } = req.body
 
     try {
         await prisma.vidio.update({
@@ -54,7 +55,8 @@ export const updateVidios = async (req, res) => {
             }, 
             data: {
                 title,
-                url
+                url,
+                time
             }
         })
         res.status(201).json({'msg' : "title updated successfully"})
