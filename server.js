@@ -1,6 +1,8 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv"
+import apicache from 'apicache'
+import helmet from "helmet";
 
 import CourseRoute from "./routes/CourseRoute.js"
 import CategoryRoute from "./routes/CategoryRoute.js"
@@ -15,20 +17,22 @@ import PointRoute from "./routes/PointRoute.js"
 import VidiosRoute from "./routes/VidiosRoute.js"
 import ToolRoute from "./routes/ToolRoute.js"
 import InstrumentRoute from "./routes/IntrumentRoute.js"
-
 import { verifyToken } from "./middleware/verifyToken.js";
-import helmet from "helmet";
+
 
 dotenv.config();
 const { PORT } = process.env;
 
 const app = express();
 
+const cache = apicache.middleware
+
 // middleware
 app.use(cors())
 app.use(express.json());
 app.use(helmet())
 app.disable('x-powered-by')
+app.use(cache('2 minutes'))
 
 app.use(CourseRoute);
 app.use(CategoryRoute);
