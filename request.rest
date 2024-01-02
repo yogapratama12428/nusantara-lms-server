@@ -2,6 +2,11 @@
 ### 
 GET https://drab-gold-rhinoceros-hose.cyclic.app
 Authorization: Bearer abcdefghjklm
+
+###
+GET https://nusantara-lms-server.vercel.app/
+Authorization: Bearer abcdefghjklm
+###
 ### GET COURSE
 GET http://localhost:3000/api/v1/course
 Authorization: Bearer abcdefghjklm

@@ -28,21 +28,29 @@ export const getCartById = async (req, res) => {
 }
 
 export const createCart = async (req, res) => {
-    const { userId, courseId, imageUrl, price, title } = req.body 
+    const { userId, courseId, imageUrl, title } = req.body 
+
+    const{ MIDTRANS_SERVERKEY_DEV, MIDTRANS_CLIENTKEY_DEV } = process.env  
+
+    const getCourse = await prisma.course.findUnique({
+        where: {
+            id: courseId,
+        }
+    })
     
     let transactionToken = ""
     let transactionRedirectUrl = ""
     
     const snap = new midtransClient.Snap({
         isProduction: false,
-        serverKey: "SB-Mid-server-8Uv86mrCeuWYpzKE_61ml4aq",
-        clientKey: "SB-Mid-client-BvrFjmMrzRtY5KLw",
+        serverKey: MIDTRANS_SERVERKEY_DEV,
+        clientKey: MIDTRANS_CLIENTKEY_DEV,
     })  
 
     const payload = {
         "transaction_details": {
             "order_id": userId + Math.random().toString().substring(2),
-            "gross_amount": price
+            "gross_amount": getCourse.price
         }, "credit_card":{
             "secure" : true
         }
@@ -63,7 +71,7 @@ export const createCart = async (req, res) => {
                 userId,
                 courseId,
                 imageUrl,
-                price, 
+                price: getCourse.price, 
                 title,
                 checkoutlink: transactionRedirectUrl,
                 checkoutToken: transactionToken
