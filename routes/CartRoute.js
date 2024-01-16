@@ -1,8 +1,10 @@
 import express from "express";
 import { createCart, deleteCart, getCart, getCartById, updateCart } from "../controllers/CartController.js";
 import { verifyToken } from "../middleware/verifyToken.js";
+import apicache from 'apicache'
 
 const router = express.Router();
+let cache = apicache.middleware
 
 router.get('/api/v1/cart', verifyToken, getCart);
 router.get('/api/v1/cart/:id', verifyToken, getCartById);

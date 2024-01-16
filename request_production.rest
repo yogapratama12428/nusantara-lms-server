@@ -14,11 +14,12 @@ Content-Type: application/json
   "userId": "qGcx8nqGILcvix8ZeWo6qjW6GLo2"
 }
 ### UPDATE COURSE
-PUT http://localhost:3000/api/v1/course/e0c85e86-d906-4dbc-8b2e-0fafb1f51b5b
+PUT http://localhost:3000/api/v1/course/699db0c3-dadd-40d0-991f-d8f5b5ac48f5
+Authorization: Bearer abcdefghjklm
 Content-Type: application/json
 
 { 
-  "price": 150 
+  "price": 550000 
 }
 
 ### UPDATE CATEGORY COURSE

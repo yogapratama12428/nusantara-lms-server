@@ -25,14 +25,14 @@ const { PORT } = process.env;
 
 const app = express();
 
-const cache = apicache.middleware
+// const cache = apicache.middleware
 
 // middleware
 app.use(cors())
 app.use(express.json());
 app.use(helmet())
 app.disable('x-powered-by')
-app.use(cache('2 minutes'))
+// app.use(cache('2 minutes'))
 
 app.use(CourseRoute);
 app.use(CategoryRoute);
