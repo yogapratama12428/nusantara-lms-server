@@ -1,7 +1,6 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv"
-import apicache from 'apicache'
 import helmet from "helmet";
 
 import CourseRoute from "./routes/CourseRoute.js"
@@ -24,15 +23,11 @@ dotenv.config();
 const { PORT } = process.env;
 
 const app = express();
-
-// const cache = apicache.middleware
-
 // middleware
 app.use(cors())
 app.use(express.json());
 app.use(helmet())
 app.disable('x-powered-by')
-// app.use(cache('2 minutes'))
 
 app.use(CourseRoute);
 app.use(CategoryRoute);

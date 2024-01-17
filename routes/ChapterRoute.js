@@ -7,8 +7,8 @@ let cache = apicache.middleware
 
 const router = express.Router()
 
-router.get('/api/v1/chapter', cache('2 minutes'), verifyToken, getChapter)
-router.get('/api/v1/chapter/:id', cache('2 minutes'),  verifyToken, getChapterById)
+router.get('/api/v1/chapter', verifyToken, getChapter)
+router.get('/api/v1/chapter/:id', verifyToken, getChapterById)
 router.post('/api/v1/chapter',verifyToken, createChapter)
 router.put('/api/v1/chapter/:id',verifyToken, updateChapter)
 router.delete('/api/v1/chapter/:id',verifyToken, deleteChapter)

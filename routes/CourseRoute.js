@@ -7,8 +7,8 @@ let cache = apicache.middleware
 
 const router = express.Router()
 
-router.get('/api/v1/course', cache('2 minutes'), verifyToken, getCourse)
-router.get('/api/v1/course/:id', cache('2 minutes'), verifyToken, getCourseById)
+router.get('/api/v1/course', verifyToken, getCourse)
+router.get('/api/v1/course/:id', verifyToken, getCourseById)
 router.post('/api/v1/course', verifyToken, createCourse)
 router.put('/api/v1/course/:id', verifyToken, updateCourse)
 router.put('/api/v1/courses/chapters/reorder',verifyToken, reOrderChapter )
