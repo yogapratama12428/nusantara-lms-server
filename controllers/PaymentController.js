@@ -1,40 +1,43 @@
-import midtransClient from 'midtrans-client'
+
+import crypto from 'crypto'
+
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
 
 export const createPayment = async (req, res) => {
-    const { purchaseId, userId, courseId, price } = req.body
+    const { order_id, transaction_status, signature_key, gross_amount, status_code } = req.body
 
-    const snap = new midtransClient.Snap({
-        isProduction: false,
-        serverKey: "SB-Mid-server-8Uv86mrCeuWYpzKE_61ml4aq",
-        clientKey: "SB-Mid-client-BvrFjmMrzRtY5KLw",
-    })  
+    const{ MIDTRANS_SERVERKEY_DEV } = process.env  
 
-    const payload = {
-        "transaction_details": {
-            "order_id": purchaseId,
-            "gross_amount": price
-        }, "credit_card":{
-            "secure" : true
-        },
-        "callbacks": {
-            "finish": `https://tokoecommerce.com/my_custom_finish/?userid=${userId}&courses=${courseId}`
-        }
-    }
-    
-    snap.createTransaction(payload)
-    .then((transaction)=>{
-        // transaction token
-        let transactionToken = transaction.token;
-        console.log('transactionToken:',transactionToken);
+        const hash = crypto.createHash('sha512').update(order_id + status_code + gross_amount + MIDTRANS_SERVERKEY_DEV).digest('hex')
 
-        // transaction redirect url
-        let transactionRedirectUrl = transaction.redirect_url;
-        console.log('transactionRedirectUrl:',transactionRedirectUrl);
+        if (signature_key !== hash )  return res.status(401).json({'error': 'signature mismatch'})
 
-        return res.status(200).json({transactionToken, transactionRedirectUrl})
-    })
-    .catch((e)=>{
-        console.log('Error occured:',e.message);
-        return res.status(401).json(e)
-    });
+        const getOrderId = await prisma.cart.findFirst({
+            where: {
+                orderId: order_id
+            }
+        })
+
+        if (!getOrderId) return res.status(401).json({'no success': 'we not found your order id'})
+
+        await prisma.purchase.create({
+            data: {
+                userId,
+                courseId: getOrderId.courseId
+            }
+        })
+
+        await prisma.cart.updateMany({
+            where: {
+                order_id
+            },
+            data: {
+                isPaid: true,
+            }
+        })
+
+        res.status(201).json({'success': 'Purchase added successfully'})
+   
 } 

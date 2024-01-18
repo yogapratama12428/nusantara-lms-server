@@ -195,6 +195,7 @@ model Cart {
   checkoutToken String? @db.Text
   checkoutlink String? @db.Text
   price Int?
+  isPaid Boolean?
   
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt()

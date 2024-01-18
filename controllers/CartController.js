@@ -53,7 +53,7 @@ export const createCart = async (req, res) => {
             "gross_amount": getCourse.price
         }, "credit_card":{
             "secure" : true
-        }
+        },
     }
 
     snap.createTransaction(payload)
@@ -72,6 +72,7 @@ export const createCart = async (req, res) => {
                 courseId,
                 imageUrl,
                 price: getCourse.price, 
+                isPaid: false,
                 title,
                 orderId: payload.transaction_details.order_id,
                 checkoutlink: transactionRedirectUrl,

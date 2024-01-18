@@ -4,6 +4,6 @@ import { verifyToken } from "../middleware/verifyToken.js";
 
 const router = express.Router();
 
-router.post('/api/v1/checkout', verifyToken, createPayment);
+router.post('/transactions/notification', createPayment);
 
 export default router;

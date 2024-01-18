@@ -63,7 +63,7 @@ Content-Type: application/json
 }
 
 ### get Purchase 
-GET http://localhost:3000/api/v1/purchase
+GET hD/api/v1/purchase
 Authorization: Bearer abcdefghjklm
 ### get purchase by Id
 GET http://localhost:3000/api/v1/purchase/qGcx8nqGILcvix8ZeWo6qjW6GLo2
@@ -75,11 +75,11 @@ Authorization: Bearer abcdefghjklm
 
 {
   "userId": "qGcx8nqGILcvix8ZeWo6qjW6GLo2",
-  "orderId": "qGcx8nqGILcvix8ZeWo6qjW6GLo27724945629413464"
+  "orderId": "qGcx8nqGILcvix8ZeWo6qjW6GLo26186475020055706"
 }
 
 ###
-DELETE http://localhost:3000/api/v1/purchase/99b6a276-0d3f-4685-bd05-bb459ac67fd0
+DELETE http://localhost:3000/api/v1/purchase/b33d3d23-6a13-4851-b9c8-070929295287
 Authorization: Bearer abcdefghjklm
 
 ### get cart
