@@ -189,6 +189,7 @@ model Cart {
   id String @id @default(uuid())
   userId String? 
   courseId String? 
+  orderId String?
   imageUrl String?
   title String?
   checkoutToken String? @db.Text

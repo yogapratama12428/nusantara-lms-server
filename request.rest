@@ -64,25 +64,27 @@ Content-Type: application/json
 
 ### get Purchase 
 GET http://localhost:3000/api/v1/purchase
-
+Authorization: Bearer abcdefghjklm
 ### get purchase by Id
 GET http://localhost:3000/api/v1/purchase/qGcx8nqGILcvix8ZeWo6qjW6GLo2
 
 ###
 POST http://localhost:3000/api/v1/purchase 
 Content-Type: application/json
+Authorization: Bearer abcdefghjklm
 
 {
   "userId": "qGcx8nqGILcvix8ZeWo6qjW6GLo2",
-  "courseId": "5540df8d-1b93-4165-9505-4afcfc469d69"
+  "orderId": "qGcx8nqGILcvix8ZeWo6qjW6GLo25771100657031849"
 }
 
 ###
-DELETE http://localhost:3000/api/v1/purchase/8347f718-7004-4392-a1b9-eb1e0d275c9b
-
+DELETE http://localhost:3000/api/v1/purchase/99b6a276-0d3f-4685-bd05-bb459ac67fd0
+Authorization: Bearer abcdefghjklm
 
 ### get cart
 GET http://localhost:3000/api/v1/cart
+Authorization: Bearer abcdefghjklm
 
 ### get cart by id 
 GET http://localhost:3000/api/v1/cart/qGcx8nqGILcvix8ZeWo6qjW6GLo2

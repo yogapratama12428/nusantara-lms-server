@@ -73,6 +73,7 @@ export const createCart = async (req, res) => {
                 imageUrl,
                 price: getCourse.price, 
                 title,
+                orderId: payload.transaction_details.order_id,
                 checkoutlink: transactionRedirectUrl,
                 checkoutToken: transactionToken
             }

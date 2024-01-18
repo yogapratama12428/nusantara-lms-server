@@ -34,14 +34,24 @@ export const getPurchaseById = async (req, res) => {
 }
 
 export const createPurchase = async (req, res) => {
-    const { userId, courseId } = req.body 
+    const { userId, orderId } = req.body 
     try {
+        
+        const getOrderId = await prisma.cart.findFirst({
+            where: {
+                orderId: orderId
+            }
+        })
+
+        console.log(getOrderId)
+
         await prisma.purchase.create({
             data: {
                 userId,
-                courseId 
+                courseId: getOrderId.courseId
             }
         })
+
         res.status(201).json({'success': 'Purchase added successfully'})
     } catch (error) {
         res.status(401).json({'error': error})

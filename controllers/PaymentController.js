@@ -15,6 +15,9 @@ export const createPayment = async (req, res) => {
             "gross_amount": price
         }, "credit_card":{
             "secure" : true
+        },
+        "callbacks": {
+            "finish": `https://tokoecommerce.com/my_custom_finish/?userid=${userId}&courses=${courseId}`
         }
     }
     
