@@ -43,7 +43,15 @@ export const createPurchase = async (req, res) => {
             }
         })
 
-        console.log(getOrderId)
+        if (!getOrderId) return res.status(401).json({'no success': 'we not found your order id'})
+
+        const checkOrderId = await prisma.cart.findFirst({
+            where: {
+                orderId: orderId
+            }
+        })
+
+        if (checkOrderId)  return res.status(401).json({'no success': 'your order id has already been'})
 
         await prisma.purchase.create({
             data: {
