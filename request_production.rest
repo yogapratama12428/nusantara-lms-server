@@ -56,6 +56,7 @@ Content-Type: application/json
 
 ### get Purchase 
 GET http://localhost:3000/api/v1/purchase 
+Authorization: Bearer abcdefghjklm
 
 
 ### get purchase by Id
@@ -71,11 +72,12 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:3000/api/v1/purchase/11fb7fb7-a491-42d7-968e-8102f88470c7
-
+DELETE http://localhost:3000/api/v1/purchase/715d7bcd-4227-44d0-8885-cb1c89c1adba
+Authorization: Bearer abcdefghjklm
 
 ### get cart
 GET http://localhost:3000/api/v1/cart
+Authorization: Bearer abcdefghjklm
 
 ### get cart by id 
 GET http://localhost:3000/api/v1/cart/qGcx8nqGILcvix8ZeWo6qjW6GLo2
@@ -173,3 +175,26 @@ Content-Type: application/json
 
 ### 
 GET http://localhost:3000/api/v1/instrument
+
+
+###
+POST http://localhost:3000/transactions/notification
+Content-Type: application/json
+
+{
+  "va_numbers": [ { "va_number": "51915041292", "bank": "bca" } ],
+  "transaction_time": "2024-01-19 13:55:33",
+  "transaction_status": "pending",
+  "transaction_id": "111bc153-7801-48d6-bdce-31cba030ab84",
+  "status_message": "midtrans payment notification",
+  "status_code": "201",
+  "signature_key": "97f2178a976bc80b090321937906efd2e02c85c5a6e988cf17badfc7747b906f048696779d8c6f4cb1f515307f461dc00cdf65b1580e10dfe41b911c76ada90b",
+  "payment_type": "bank_transfer",
+  "payment_amounts": [],
+  "order_id": "qGcx8nqGILcvix8ZeWo6qjW6GLo27186132613057716",
+  "merchant_id": "G199251915",
+  "gross_amount": "350000.00",
+  "fraud_status": "accept",
+  "expiry_time": "2024-01-20 13:55:33",
+  "currency": "IDR"
+}
