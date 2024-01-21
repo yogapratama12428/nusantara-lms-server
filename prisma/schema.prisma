@@ -182,6 +182,7 @@ model Purchase {
   updatedAt DateTime @updatedAt()
 
   @@index([courseId])
+  @@unique([courseId])
 }
 
 model Cart {

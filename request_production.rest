@@ -72,7 +72,7 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:3000/api/v1/purchase/c50255ed-9d9d-4535-97f1-776050960cdc
+DELETE http://localhost:3000/api/v1/purchase/f9a2623c-63e8-46a6-b741-b8ed77666c7b
 Authorization: Bearer abcdefghjklm
 
 ### get cart
