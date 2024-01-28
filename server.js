@@ -22,11 +22,11 @@ import { verifyToken } from "./middleware/verifyToken.js";
 dotenv.config();
 const { PORT } = process.env;
 
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  limit: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes).
-  message: "to many requests",
-});
+// const limiter = rateLimit({
+//   windowMs: 15 * 60 * 1000, // 15 minutes
+//   limit: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes).
+//   message: "to many requests",
+// });
 
 const app = express();
 // middleware
@@ -34,7 +34,7 @@ app.use(cors());
 app.use(express.json());
 app.use(helmet());
 app.disable("x-powered-by");
-app.use(limiter);
+// app.use(limiter);
 
 app.use(CourseRoute);
 app.use(CategoryRoute);
