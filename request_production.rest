@@ -85,12 +85,12 @@ GET http://localhost:3000/api/v1/cart/qGcx8nqGILcvix8ZeWo6qjW6GLo2
 ### post cart 
 POST http://localhost:3000/api/v1/cart
 Content-Type: application/json 
+Authorization: Bearer abcdefghjklm
 
 {
    "userId": "qGcx8nqGILcvix8ZeWo6qjW6GLo2",
    "courseId": "168d8eef-223c-4f49-a507-c4aa2b8438a9",
    "imageUrl": "https://utfs.io/f/36976170-aea3-46af-ac03-363022d206b0-6v185r.png",
-   "price": "100000",
    "title": "Build an Application GPS Tracker Platform"
 }
 

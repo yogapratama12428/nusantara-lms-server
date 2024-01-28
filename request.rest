@@ -1,6 +1,6 @@
 
 ### 
-GET https://drab-gold-rhinoceros-hose.cyclic.app
+GET http://199.232.46.189:3000
 Authorization: Bearer abcdefghjklm
 
 ###

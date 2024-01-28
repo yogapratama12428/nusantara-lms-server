@@ -1,7 +1,7 @@
 {
   "name": "nusantara-lms-server",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.9.1",
+  "description": "fix midtrans error",
   "main": "server.js",
   "type": "module",
   "scripts": {
