@@ -193,3 +193,31 @@ DELETE http://localhost:3000/api/v1/cart/da061c4e-a2f4-43d1-a459-3541b7b645ea
 ###
 GET http://localhost:3000/api/v1/chapter/0571f77f-7908-4797-8de7-66622e2aac3f
 Authorization: Bearer abcdefghjklm
+
+### Test Progress API
+POST http://localhost:3000/api/v1/chapter/progress
+Authorization: Bearer abcdefghjklm
+Content-Type: application/json 
+
+{
+  "userId": "qGcx8nqGILcvix8ZeWo6qjW6GLo2",
+  "courseId": "168d8eef-223c-4f49-a507-c4aa2b8438a9",
+  "videoId": "53e13423-8ea0-4bf9-878c-8a1dfbfd97c5",
+  "isCompleted": true
+}
+
+###
+GET http://localhost:3000/api/v1/chapter/progres/qGcx8nqGILcvix8ZeWo6qjW6GLo2/168d8eef-223c-4f49-a507-c4aa2b8438a9
+Authorization: Bearer abcdefghjklm
+###
+DELETE http://localhost:3000/api/v1/chapter/progres/qGcx8nqGILcvix8ZeWo6qjW6GLo2
+Authorization: Bearer abcdefghjklm
+###
+
+GET http://localhost:3000/api/v1/course/168d8eef-223c-4f49-a507-c4aa2b8438a9
+Authorization: Bearer abcdefghjklm
+
+###
+### get cart
+GET http://localhost:3000/api/v1/vidios
+Authorization: Bearer abcdefghjklm

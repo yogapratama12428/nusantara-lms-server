@@ -131,7 +131,6 @@ model Chapter {
   courseId String 
   course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
 
-  userProgress UserProgress[]
   vidios Vidio[]
 
   createdAt DateTime @default(now())
@@ -146,6 +145,7 @@ model Vidio {
   title String?
   url String?
   time Int?
+  courseId String?
 
   chapterId String? 
   chapter Chapter? @relation(fields: [chapterId], references: [id], onDelete: Cascade)
@@ -158,17 +158,14 @@ model Vidio {
 model UserProgress {
   id String @id @default(uuid())
   userId String
-
-  chapterId String?
-  chapters Chapter? @relation(fields: [chapterId], references: [id], onDelete: Cascade)
-
+  courseId String
+  videoId String @unique
+  
   isCompleted Boolean @default(false)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@index([chapterId])
-  @@unique([userId, chapterId])
 }
 
 model Purchase {
