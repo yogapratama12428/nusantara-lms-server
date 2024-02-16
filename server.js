@@ -17,6 +17,7 @@ import PointRoute from "./routes/PointRoute.js";
 import VidiosRoute from "./routes/VidiosRoute.js";
 import ToolRoute from "./routes/ToolRoute.js";
 import InstrumentRoute from "./routes/IntrumentRoute.js";
+import QuestionRoute from "./routes/QuestionChapterRoute.js";
 import { verifyToken } from "./middleware/verifyToken.js";
 
 dotenv.config();
@@ -49,6 +50,7 @@ app.use(PointRoute);
 app.use(VidiosRoute);
 app.use(ToolRoute);
 app.use(InstrumentRoute);
+app.use(QuestionRoute);
 
 app.get("/test", verifyToken, (req, res) => {
   res.status(200).json(`hello I'm from port :` + PORT);

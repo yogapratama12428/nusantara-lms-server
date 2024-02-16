@@ -16,8 +16,18 @@ export const getPurchase = async (req, res) => {
 };
 
 export const getPurchaseById = async (req, res) => {
-  const { userId } = req.params;
+  const { userId, courseId } = req.params;
   try {
+    // const userUpdateProgress = await prisma.userProgress.count({
+    //   where: { userId, courseId },
+    // });
+
+    // const countVideo = await prisma.vidio.count({
+    //   where: { courseId },
+    // });
+
+    // const progresCourse = (userUpdateProgress / countVideo) * 100;
+
     const response = await prisma.purchase.findMany({
       where: {
         userId,
@@ -79,6 +89,22 @@ export const updatePurchase = async (req, res) => {
       },
     });
     res.status(201).json({ success: "Purchase Update successfully" });
+  } catch (error) {
+    res.status(401).json({ error: error });
+  }
+};
+
+export const updatePurchaseById = async (req, res) => {
+  const { id } = req.params;
+  const data = req.body;
+  try {
+    const response = await prisma.purchase.update({
+      where: { id },
+      data: {
+        progressCourse: data.progressCourse,
+      },
+    });
+    res.status(201).json(response);
   } catch (error) {
     res.status(401).json({ error: error });
   }

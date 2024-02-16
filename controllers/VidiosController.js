@@ -12,15 +12,20 @@ export const getVidios = async (req, res) => {
 };
 
 export const getVidiosById = async (req, res) => {
-  const { id } = req.params;
+  const { id, userId } = req.params;
 
   try {
+    const progressVideo = await prisma.userProgress.findMany({
+      where: { userId },
+    });
+
     const response = await prisma.vidio.findUnique({
       where: {
         id,
       },
     });
-    res.status(200).json(response);
+
+    res.status(200).json({ progressVideo, ...response });
   } catch (error) {
     res.status(404).json({ msg: error.message });
   }

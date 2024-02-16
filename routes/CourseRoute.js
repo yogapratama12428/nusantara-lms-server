@@ -4,6 +4,7 @@ import {
   deletedCourse,
   getCourse,
   getCourseById,
+  getCourseLearnById,
   reOrderChapter,
   updateCategoryCourse,
   updateCourse,
@@ -17,6 +18,13 @@ const router = express.Router();
 
 router.get("/api/v1/course", verifyToken, getCourse);
 router.get("/api/v1/course/:id", verifyToken, getCourseById);
+
+router.get(
+  "/api/v1/course/learn/:userId/:courseId",
+  verifyToken,
+  getCourseLearnById
+);
+
 router.post("/api/v1/course", verifyToken, createCourse);
 router.put("/api/v1/course/:id", verifyToken, updateCourse);
 router.put("/api/v1/courses/chapters/reorder", verifyToken, reOrderChapter);

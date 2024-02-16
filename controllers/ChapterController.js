@@ -20,6 +20,7 @@ export const getChapterById = async (req, res) => {
       },
       include: {
         vidios: true,
+        questionChapters: true,
       },
     });
     res.status(200).json(response);
@@ -98,21 +99,92 @@ export const deleteChapter = async (req, res) => {
   }
 };
 
+export const updateChapterQuestionProgress = async (req, res) => {
+  const { question_chapter } = req.body;
+  const { chapterId, userId } = req.params;
+
+  try {
+    const progressCourse = await prisma.userProgressQuestion.update({
+      where: {
+        userId,
+        chapterId,
+      },
+      data: {
+        question_chapter,
+      },
+    });
+    res.status(201).json(progressCourse);
+  } catch (error) {
+    res.status(401).json({ error: error });
+  }
+};
+
+export const createChapterQuestionProgress = async (req, res) => {
+  const { userId, courseId, chapterId, question_chapter } = req.body;
+  try {
+    const progressCourse = await prisma.userProgressQuestion.create({
+      data: {
+        userId,
+        chapterId,
+        courseId,
+        question_chapter,
+      },
+    });
+    res.status(201).json(progressCourse);
+  } catch (error) {
+    res.status(401).json({ error: error });
+  }
+};
+
+export const deleteChapterQuestionProgress = async (req, res) => {
+  const { userId } = req.params;
+  try {
+    const progressCourse = await prisma.userProgressQuestion.deleteMany({
+      where: {
+        userId,
+      },
+    });
+    res.status(201).json(progressCourse);
+  } catch (error) {
+    res.status(401).json({ error: error });
+  }
+};
+
 export const updateProgress = async (req, res) => {
-  const { userId, chapterId, courseId, videoId, isCompleted } = req.body;
+  const { userId, courseId, videoId, isCompleted } = req.body;
 
   try {
     const response = await prisma.userProgress.create({
       data: {
         userId,
-        chapterId,
         videoId,
         courseId,
         isCompleted,
       },
     });
 
-    res.status(201).json({ message: response });
+    const userUpdateProgress = await prisma.userProgress.count({
+      where: { userId, courseId },
+    });
+
+    const countVideo = await prisma.vidio.count({
+      where: { courseId },
+    });
+
+    const progresCourse = (userUpdateProgress / countVideo) * 100;
+
+    console.log(progresCourse);
+
+    const updatePurchase = await prisma.purchase.update({
+      where: {
+        courseId,
+      },
+      data: {
+        progressCourse: progresCourse,
+      },
+    });
+
+    res.status(201).json({ ...response, updatePurchase });
   } catch (error) {
     res.status(401).json({ msg: error.message });
   }
@@ -140,6 +212,23 @@ export const getChapterProgressById = async (req, res) => {
       response: progresCourse,
       data: progress,
     });
+  } catch (error) {
+    res.status(404).json({ error: error });
+  }
+};
+
+export const getChapterProgressQuestionById = async (req, res) => {
+  const { userId, chapterId } = req.params;
+  try {
+    const questionprogres = await prisma.userProgressQuestion.findFirst({
+      where: { userId, chapterId },
+    });
+
+    const questionchapter = await prisma.questionChapter.findMany({
+      where: { chapterId },
+    });
+
+    res.status(200).json({ questionprogres, questionchapter });
   } catch (error) {
     res.status(404).json({ error: error });
   }

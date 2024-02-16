@@ -63,10 +63,12 @@ Content-Type: application/json
 }
 
 ### get Purchase 
-GET hD/api/v1/purchase
+GET http://localhost:3000/api/v1/purchase
 Authorization: Bearer abcdefghjklm
-### get purchase by Id
+
+### /api/v1/purchase/:userId
 GET http://localhost:3000/api/v1/purchase/qGcx8nqGILcvix8ZeWo6qjW6GLo2
+Authorization: Bearer abcdefghjklm
 
 ###
 POST http://localhost:3000/api/v1/purchase 
@@ -76,6 +78,15 @@ Authorization: Bearer abcdefghjklm
 {
   "userId": "qGcx8nqGILcvix8ZeWo6qjW6GLo2",
   "orderId": "qGcx8nqGILcvix8ZeWo6qjW6GLo26186475020055706"
+}
+
+###
+PUT http://localhost:3000/api/v1/purchase/progress/83689640-25df-4ff6-8f71-ad7ec4993f6a
+Content-Type: application/json
+Authorization: Bearer abcdefghjklm
+
+{
+  "progressCourse": 0
 }
 
 ###
@@ -202,18 +213,22 @@ Content-Type: application/json
 {
   "userId": "qGcx8nqGILcvix8ZeWo6qjW6GLo2",
   "courseId": "168d8eef-223c-4f49-a507-c4aa2b8438a9",
-  "videoId": "53e13423-8ea0-4bf9-878c-8a1dfbfd97c5",
+  "videoId": "f5152e07-f85e-4eab-b9b1-962b09265275",
   "isCompleted": true
 }
 
-###
-GET http://localhost:3000/api/v1/chapter/progres/qGcx8nqGILcvix8ZeWo6qjW6GLo2/168d8eef-223c-4f49-a507-c4aa2b8438a9
+### 
+GET http://localhost:3000/api/v1/chapter/progres/qGcx8nqGILcvix8ZeWo6qjW6GLo2/question/3064649b-71be-4344-9a89-7dd23cb6b12c
 Authorization: Bearer abcdefghjklm
 ###
 DELETE http://localhost:3000/api/v1/chapter/progres/qGcx8nqGILcvix8ZeWo6qjW6GLo2
 Authorization: Bearer abcdefghjklm
-###
 
+### /api/v1/course/learn/:userId/:courseId
+GET http://localhost:3000/api/v1/course/learn/qGcx8nqGILcvix8ZeWo6qjW6GLo2/168d8eef-223c-4f49-a507-c4aa2b8438a9
+Authorization: Bearer abcdefghjklm
+
+###
 GET http://localhost:3000/api/v1/course/168d8eef-223c-4f49-a507-c4aa2b8438a9
 Authorization: Bearer abcdefghjklm
 
@@ -221,3 +236,41 @@ Authorization: Bearer abcdefghjklm
 ### get cart
 GET http://localhost:3000/api/v1/vidios
 Authorization: Bearer abcdefghjklm
+
+### get cart
+GET http://localhost:3000/api/v1/vidios/learn/qGcx8nqGILcvix8ZeWo6qjW6GLo2/53e13423-8ea0-4bf9-878c-8a1dfbfd97c5/168d8eef-223c-4f49-a507-c4aa2b8438a9s
+Authorization: Bearer abcdefghjklm
+
+###
+GET http://localhost:3000/api/v1/chapter/progres/qGcx8nqGILcvix8ZeWo6qjW6GLo2
+Authorization: Bearer abcdefghjklm
+
+### Test Progress API
+POST http://localhost:3000/api/v1/chapter/progress/question
+Authorization: Bearer abcdefghjklm
+Content-Type: application/json 
+
+{
+  "userId": "qGcx8nqGILcvix8ZeWo6qjW6GLo2",
+  "chapterId": "3064649b-71be-4344-9a89-7dd23cb6b12c",
+  "courseId": "168d8eef-223c-4f49-a507-c4aa2b8438a9",
+  "question_chapter": 80
+}
+
+### Test Progress API
+PUT http://localhost:3000/api/v1/chapter/question
+Authorization: Bearer abcdefghjklm
+Content-Type: application/json 
+
+{
+  "userId": "qGcx8nqGILcvix8ZeWo6qjW6GLo2",
+  "courseId": "168d8eef-223c-4f49-a507-c4aa2b8438a9",
+  "courseId": "168d8eef-223c-4f49-a507-c4aa2b8438a9",
+  "videoId": "f5152e07-f85e-4eab-b9b1-962b09265275",
+  "isCompleted": true
+}
+### 
+
+DELETE http://localhost:3000/api/v1/chapter/progress/question/qGcx8nqGILcvix8ZeWo6qjW6GLo2
+Authorization: Bearer abcdefghjklm
+Content-Type: application/json 

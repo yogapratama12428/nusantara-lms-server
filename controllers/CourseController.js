@@ -25,6 +25,7 @@ export const getCourseById = async (req, res) => {
           },
           include: {
             vidios: true,
+            questionChapters: true,
           },
         },
         purchases: true,
@@ -35,6 +36,68 @@ export const getCourseById = async (req, res) => {
       },
     });
     res.status(200).json(response);
+  } catch (error) {
+    res.status(404).json({ msg: error.message });
+  }
+};
+
+export const getCourseLearnById = async (req, res) => {
+  const { userId, courseId } = req.params;
+
+  try {
+    const userUpdateProgress = await prisma.userProgress.count({
+      where: { userId, courseId },
+    });
+
+    const countVideo = await prisma.vidio.count({
+      where: { courseId },
+    });
+
+    const progressCourse = (userUpdateProgress / countVideo) * 100;
+
+    const progressVideo = await prisma.userProgress.findMany({
+      where: {
+        userId,
+        courseId,
+      },
+    });
+
+    const progressQuestion = await prisma.userProgressQuestion.findMany({
+      where: {
+        userId,
+        courseId,
+      },
+    });
+
+    const response = await prisma.course.findUnique({
+      where: {
+        id: courseId,
+      },
+      include: {
+        chapters: {
+          orderBy: {
+            createdAt: "asc",
+          },
+          include: {
+            vidios: {
+              orderBy: {
+                createdAt: "asc",
+              },
+            },
+            questionChapters: true,
+          },
+        },
+        purchases: true,
+        attachments: true,
+        captures: true,
+        points: true,
+        tools: true,
+      },
+    });
+
+    res
+      .status(200)
+      .json({ progressVideo, progressQuestion, progressCourse, response });
   } catch (error) {
     res.status(404).json({ msg: error.message });
   }
@@ -104,6 +167,8 @@ export const updateCourse = async (req, res) => {
     isFree,
     fulltext,
     videoUrl,
+    isCompleted,
+    isPromoted,
   } = req.body;
   const { id } = req.params;
 
@@ -122,6 +187,8 @@ export const updateCourse = async (req, res) => {
         isFree,
         fulltext,
         videoUrl,
+        isCompleted,
+        isPromoted,
       },
     });
     res.status(201).json(response);

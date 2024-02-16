@@ -1,12 +1,16 @@
 import express from "express";
 import {
   createChapter,
+  createChapterQuestionProgress,
   deleteChapter,
+  deleteChapterQuestionProgress,
   deleteProgress,
   getChapter,
   getChapterById,
   getChapterProgressById,
+  getChapterProgressQuestionById,
   updateChapter,
+  updateChapterQuestionProgress,
   updateProgress,
 } from "../controllers/ChapterController.js";
 import { verifyToken } from "../middleware/verifyToken.js";
@@ -24,7 +28,33 @@ router.get(
   verifyToken,
   getChapterProgressById
 );
+
 router.post("/api/v1/chapter/progress", verifyToken, updateProgress);
+
 router.delete("/api/v1/chapter/progres/:id", verifyToken, deleteProgress);
+
+router.post(
+  "/api/v1/chapter/progress/question",
+  verifyToken,
+  createChapterQuestionProgress
+);
+
+router.get(
+  "/api/v1/chapter/progres/:userId/question/:chapterId",
+  verifyToken,
+  getChapterProgressQuestionById
+);
+
+router.put(
+  "/api/v1/chapter/:chapterId/question/:userId",
+  verifyToken,
+  updateChapterQuestionProgress
+);
+
+router.delete(
+  "/api/v1/chapter/progress/question/:userId",
+  verifyToken,
+  deleteChapterQuestionProgress
+);
 
 export default router;
