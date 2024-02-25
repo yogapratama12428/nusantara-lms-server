@@ -41,7 +41,7 @@ app.use(express.json());
 app.use(
   "/proxy",
   proxy("www.google.com", {
-    https: false,
+    https: true,
   })
 );
 
