@@ -34,7 +34,10 @@ const app = express();
 // middleware
 app.use(
   cors({
-    origin: ["http://localhost:5173"],
+    origin: [
+      "http://localhost:5173",
+      "https://drab-gold-rhinoceros-hose.cyclic.app",
+    ],
   })
 );
 app.use(express.json());
