@@ -3,6 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import helmet from "helmet";
 import rateLimit from "express-rate-limit";
+import proxy from "express-http-proxy";
 
 import CourseRoute from "./routes/CourseRoute.js";
 import CategoryRoute from "./routes/CategoryRoute.js";
@@ -31,10 +32,35 @@ const { PORT } = process.env;
 
 const app = express();
 // middleware
-app.use(cors());
+app.use(
+  cors({
+    origin: ["http://localhost:5173"],
+  })
+);
 app.use(express.json());
-app.use(helmet());
-app.disable("x-powered-by");
+app.use(
+  "/proxy",
+  proxy("www.google.com", {
+    https: false,
+  })
+);
+
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        "script-src": ["'self'", "example.com"],
+        "style-src": null,
+      },
+    },
+    referrerPolicy: {
+      policy: ["origin", "unsafe-url"],
+    },
+  })
+);
+
+app.use(helmet.hidePoweredBy());
+
 // app.use(limiter);
 
 app.use(CourseRoute);
