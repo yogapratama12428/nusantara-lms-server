@@ -8,7 +8,7 @@ GET https://nusantara-lms-server.vercel.app/
 Authorization: Bearer abcdefghjklm
 ###
 ### GET COURSE
-GET http://localhost:3000/api/v1/course
+GET http://localhost:3001/api/v1/course
 Authorization: Bearer abcdefghjklm
 ### GET COURSE BY ID
 GET http://localhost:3000/api/v1/course/168d8eef-223c-4f49-a507-c4aa2b8438a9

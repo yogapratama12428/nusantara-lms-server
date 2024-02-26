@@ -24,11 +24,11 @@ import { verifyToken } from "./middleware/verifyToken.js";
 dotenv.config();
 const { PORT } = process.env;
 
-// const limiter = rateLimit({
-//   windowMs: 15 * 60 * 1000, // 15 minutes
-//   limit: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes).
-//   message: "to many requests",
-// });
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  limit: 1000, // Limit each IP to 100 requests per `window` (here, per 15 minutes).
+  message: "to many requests",
+});
 
 const app = express();
 // middleware
@@ -41,31 +41,24 @@ app.use(
   })
 );
 app.use(express.json());
-app.use(
-  "/proxy",
-  proxy("www.google.com", {
-    https: true,
-  })
-);
 
-app.use(
-  helmet({
-    contentSecurityPolicy: {
-      directives: {
-        "script-src": ["'self'", "example.com"],
-        "style-src": null,
-      },
-    },
-    referrerPolicy: {
-      policy: ["origin", "unsafe-url"],
-    },
-  })
-);
+// app.use(
+//   helmet({
+//     contentSecurityPolicy: {
+//       directives: {
+//         // "script-src": ["'self'", "example.com"],
+//         "style-src": null,
+//       },
+//     },
+//     referrerPolicy: {
+//       policy: ["origin", "unsafe-url"],
+//     },
+//   })
+// );
 
-app.use(helmet.hidePoweredBy());
+// app.use(helmet.hidePoweredBy());
 
-// app.use(limiter);
-
+app.use(limiter);
 app.use(CourseRoute);
 app.use(CategoryRoute);
 app.use(PurchaseRoute);
