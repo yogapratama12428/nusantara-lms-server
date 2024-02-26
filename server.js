@@ -32,28 +32,14 @@ const limiter = rateLimit({
 
 const app = express();
 // middleware
+
 app.use(
   cors({
     origin: ["http://localhost:5173", "https://codewithyoga.com"],
   })
 );
 app.use(express.json());
-
-// app.use(
-//   helmet({
-//     contentSecurityPolicy: {
-//       directives: {
-//         // "script-src": ["'self'", "example.com"],
-//         "style-src": null,
-//       },
-//     },
-//     referrerPolicy: {
-//       policy: ["origin", "unsafe-url"],
-//     },
-//   })
-// );
-
-// app.use(helmet.hidePoweredBy());
+app.use(helmet());
 
 app.use(limiter);
 app.use(CourseRoute);
