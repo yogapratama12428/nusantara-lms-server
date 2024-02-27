@@ -3,7 +3,6 @@ import cors from "cors";
 import dotenv from "dotenv";
 import helmet from "helmet";
 import rateLimit from "express-rate-limit";
-import proxy from "express-http-proxy";
 
 import CourseRoute from "./routes/CourseRoute.js";
 import CategoryRoute from "./routes/CategoryRoute.js";
@@ -24,24 +23,27 @@ import { verifyToken } from "./middleware/verifyToken.js";
 dotenv.config();
 const { PORT } = process.env;
 
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  limit: 1000, // Limit each IP to 100 requests per `window` (here, per 15 minutes).
-  message: "to many requests",
-});
-
 const app = express();
+
 // middleware
+app.use(express.json());
 
 app.use(
   cors({
     origin: ["http://localhost:5173", "https://codewithyoga.com"],
   })
 );
-app.use(express.json());
+
 app.use(helmet());
 
-app.use(limiter);
+app.use(
+  rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    limit: 1000, // Limit each IP to 100 requests per `window` (here, per 15 minutes).
+    message: "to many requests",
+  })
+);
+
 app.use(CourseRoute);
 app.use(CategoryRoute);
 app.use(PurchaseRoute);

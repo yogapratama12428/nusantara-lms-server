@@ -1,4 +1,6 @@
-
+### 
+GET http://localhost:3000/api/v1/course
+Authorization: Bearer abcdefghjklm
 ### 
 GET http://199.232.46.189:3000
 Authorization: Bearer abcdefghjklm
