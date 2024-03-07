@@ -1,6 +1,6 @@
 {
   "name": "nusantara-lms-server",
-  "version": "2",
+  "version": "2.0.0",
   "description": "add jwt and cookie parser for authentication user due to security",
   "main": "server.js",
   "type": "module",

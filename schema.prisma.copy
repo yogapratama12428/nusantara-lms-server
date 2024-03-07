@@ -1,0 +1,263 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets = ["native", "rhel-openssl-1.0.x"]
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+model User {
+  id String @id @default(uuid())
+  userId String @unique
+  email String @unique
+  access_token String? @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Instrument { 
+  id String @id @default(uuid())
+  title String? 
+  imageUrl String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Course {
+  id String @id @default(uuid())
+  userId String
+  title String @db.Text
+  description String? @db.Text
+  fulltext String? @db.Text
+  imageUrl String? @db.Text
+  videoUrl String? @db.Text
+  isCompleted Boolean? @default(false)
+  isPromoted Boolean? @default(false)
+  price Float?
+  isPublished Boolean @default(false)
+  isFree Boolean @default(false)
+
+  categoryId String?
+  category Category? @relation(fields: [categoryId], references: [id])
+
+  chapters Chapter[]
+  attachments Attachment[]
+  purchases Purchase[]
+  captures Capture[]
+  points Point[]
+  tools Tool[]
+  assesment Assestment[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([categoryId])
+}
+
+
+model Assestment {
+ id String @id @default(uuid()) 
+ userId String
+ nilai Int  
+
+ courseId String?
+ course Course? @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+ @@index([courseId])
+ createdAt DateTime @default(now())
+ updatedAt DateTime @updatedAt
+}
+
+
+model Certificate { 
+  id String @id @default(uuid())
+  userId String?
+  courseId String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Profile {
+  id String @id @default(uuid())
+  name String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+
+model Tool {
+  id String @id @default(uuid())
+  title String?
+  imageUrl String?
+
+  courseId String?
+  course Course? @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([courseId])
+}
+model Point {
+  id String @id @default(uuid())
+  title String?
+
+  courseId String?
+  course Course? @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@index([courseId])
+}
+
+model Capture {
+  id String @id @default(uuid())
+  url String?
+
+  courseId String?
+  course Course? @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([courseId])
+}
+
+model Category {
+  id String @id @default(uuid())
+  name String @unique
+  courses Course[]
+}
+
+model Attachment {
+  id String @id @default(uuid())
+  name String
+  url String @db.Text
+
+  courseId String
+  course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([courseId])
+}
+
+model Chapter {
+  id String @id @default(uuid())
+  title String
+  description String? @db.Text
+  fulltext String? @db.Text
+  videoUrl String? @db.Text
+  duration Int?
+  
+  position Int
+  isPublished Boolean @default(false)
+  isFree Boolean @default(false)
+
+  courseId String 
+  course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  vidios Vidio[]
+  questionChapters QuestionChapter[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([courseId])
+}
+
+model QuestionChapter{
+  id String @id @default(uuid())
+  question String?
+  answer String?
+
+  chapterId String?
+  chapter Chapter? @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([chapterId])
+} 
+
+model Vidio {
+  id String @id @default(uuid())
+  title String?
+  url String?
+  time Int?
+  courseId String?
+
+  chapterId String? 
+  chapter Chapter? @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([chapterId])
+}
+model UserProgress {
+  id String @id @default(uuid())
+  userId String?
+  courseId String?
+  videoId String? @unique
+  
+  isCompleted Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+
+model UserProgressQuestion {
+  id String @id @default(uuid())
+  userId String?
+  courseId String?
+  chapterId String?
+  question_chapter Int? @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Purchase {
+  id String @id @default(uuid())
+  userId String
+  isCompleted Boolean? @default(false)
+  progressCourse Int? @default(0)
+
+  courseId String?
+  courses Course? @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt()
+
+  @@index([courseId])
+  @@unique([courseId])
+}
+
+model Cart {
+  id String @id @default(uuid())
+  userId String? 
+  courseId String? 
+  orderId String?
+  imageUrl String?
+  title String?
+  checkoutToken String? @db.Text
+  checkoutlink String? @db.Text
+  price Int?
+  isPaid Boolean?
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt()
+}
