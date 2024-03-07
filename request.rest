@@ -1,4 +1,20 @@
-### 
+###
+POST http://localhost:3000/api/v1/sign-in
+Content-Type: application/json
+
+{ 
+  "email": "yoga.pratama.pangestu@gmail.com",
+  "userId": "qGcx8nqGILcvix8ZeWo6qjW6GLo2"
+}
+###
+POST http://localhost:3000/api/v1/sign-out
+Content-Type: application/json
+
+###
+GET http://localhost:3000/api/v1/test-token
+
+
+###
 GET http://localhost:3000/api/v1/course
 Authorization: Bearer abcdefghjklm
 ### 
@@ -10,7 +26,7 @@ GET https://nusantara-lms-server.vercel.app/
 Authorization: Bearer abcdefghjklm
 ###
 ### GET COURSE
-GET http://localhost:3001/api/v1/course
+GET http://localhost:3000/api/v1/course
 Authorization: Bearer abcdefghjklm
 ### GET COURSE BY ID
 GET http://localhost:3000/api/v1/course/168d8eef-223c-4f49-a507-c4aa2b8438a9

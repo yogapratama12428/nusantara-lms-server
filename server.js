@@ -18,6 +18,9 @@ import VidiosRoute from "./routes/VidiosRoute.js";
 import ToolRoute from "./routes/ToolRoute.js";
 import InstrumentRoute from "./routes/IntrumentRoute.js";
 import QuestionRoute from "./routes/QuestionChapterRoute.js";
+import AuthRoute from "./routes/AuthRoute.js";
+import cookieParser from "cookie-parser";
+
 import { verifyToken } from "./middleware/verifyToken.js";
 
 dotenv.config();
@@ -31,6 +34,7 @@ app.use(express.json());
 app.use(
   cors({
     origin: ["http://localhost:5173", "https://codewithyoga.com"],
+    credentials: true,
   })
 );
 
@@ -43,6 +47,8 @@ app.use(
     message: "to many requests",
   })
 );
+
+app.use(cookieParser());
 
 app.use(CourseRoute);
 app.use(CategoryRoute);
@@ -58,6 +64,7 @@ app.use(VidiosRoute);
 app.use(ToolRoute);
 app.use(InstrumentRoute);
 app.use(QuestionRoute);
+app.use(AuthRoute);
 
 app.get("/test", verifyToken, (req, res) => {
   res.status(200).json(`hello I'm from port :` + PORT);

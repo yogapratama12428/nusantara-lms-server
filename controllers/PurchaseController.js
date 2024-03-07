@@ -16,17 +16,13 @@ export const getPurchase = async (req, res) => {
 };
 
 export const getPurchaseById = async (req, res) => {
-  const { userId, courseId } = req.params;
+  const { userId } = req.params;
   try {
-    // const userUpdateProgress = await prisma.userProgress.count({
-    //   where: { userId, courseId },
-    // });
+    console.log(req.userId);
 
-    // const countVideo = await prisma.vidio.count({
-    //   where: { courseId },
-    // });
-
-    // const progresCourse = (userUpdateProgress / countVideo) * 100;
+    if (req.userId !== userId) {
+      res.status(403).json({ error: "Not Found" });
+    }
 
     const response = await prisma.purchase.findMany({
       where: {

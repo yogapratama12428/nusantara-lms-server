@@ -1,11 +1,18 @@
 import { PrismaClient } from "@prisma/client";
+import jwt from "jsonwebtoken";
 
 const prisma = new PrismaClient();
 
 export const getCourse = async (req, res) => {
   try {
     const response = await prisma.course.findMany({});
-    res.status(200).json(response);
+
+    const generateresponse = jwt.sign(
+      { response },
+      process.env.ACCESS_TOKEN_SECRET
+    );
+
+    res.status(200).json(generateresponse);
   } catch (error) {
     res.status(404).json({ msg: error.message });
   }
@@ -23,19 +30,33 @@ export const getCourseById = async (req, res) => {
           orderBy: {
             createdAt: "asc",
           },
-          include: {
-            vidios: true,
-            questionChapters: true,
+          select: {
+            id: true,
+            title: true,
+            isPublished: true,
+            isFree: true,
+            vidios: {
+              select: {
+                id: true,
+                title: true,
+                time: true,
+              },
+            },
           },
         },
-        purchases: true,
         attachments: true,
         captures: true,
         points: true,
         tools: true,
       },
     });
-    res.status(200).json(response);
+
+    const generateresponse = jwt.sign(
+      { response },
+      process.env.ACCESS_TOKEN_SECRET
+    );
+
+    res.status(200).json(generateresponse);
   } catch (error) {
     res.status(404).json({ msg: error.message });
   }
@@ -45,6 +66,9 @@ export const getCourseLearnById = async (req, res) => {
   const { userId, courseId } = req.params;
 
   try {
+    if (userId !== req.userId)
+      return res.status(401).send("Access denied... Credentials Error...");
+
     const userUpdateProgress = await prisma.userProgress.count({
       where: { userId, courseId },
     });

@@ -19,8 +19,13 @@ export const getChapterById = async (req, res) => {
         id,
       },
       include: {
-        vidios: true,
-        questionChapters: true,
+        vidios: {
+          select: {
+            id: true,
+            title: true,
+            time: true,
+          },
+        },
       },
     });
     res.status(200).json(response);

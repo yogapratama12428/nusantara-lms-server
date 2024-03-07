@@ -14,8 +14,9 @@ datasource db {
 
 model User {
   id String @id @default(uuid())
-  userId String? @unique
-  email String? @unique
+  userId String @unique
+  email String @unique
+  access_token String? @db.Text
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
