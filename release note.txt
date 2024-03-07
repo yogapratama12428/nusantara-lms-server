@@ -1,0 +1,6 @@
+# 2.0
+1. add jwt token and cookie 
+2. encrypt the content to secure 
+
+# 2.1 
+1. modify env
