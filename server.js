@@ -70,6 +70,11 @@ app.get("/test", verifyToken, (req, res) => {
   res.status(200).json(`hello I'm from port :` + PORT);
 });
 
-app.listen(PORT, () => {
-  console.log("listening on port " + PORT);
-});
+try {
+  app.listen(PORT, () => {
+    console.log("listening on port " + PORT);
+  });
+} catch (error) {
+  console.log(error);
+  process.exit(1);
+}
