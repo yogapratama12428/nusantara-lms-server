@@ -31,8 +31,6 @@ const app = express();
 // middleware
 app.use(express.json());
 
-app.set('trust proxy', true);
-
 app.use(
   cors({
     origin: ["http://localhost:5173", "https://codewithyoga.com"],
@@ -42,13 +40,13 @@ app.use(
 
 app.use(helmet());
 
+const allowlist = ['192.168.137.208', '13.126.192.186']
+
 app.use(
   rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
     limit: 1000, // Limit each IP to 100 requests per `window` (here, per 15 minutes).
-    headers: true,
-    standardHeaders: 'draft-7',
-    legacyHeaders: false,
+    skip: (req, res) => allowlist.includes(req.ip),
     validate: {
       trustProxy: true,
       xForwardedForHeader: true,
