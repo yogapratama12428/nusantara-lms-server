@@ -28,7 +28,7 @@ export const login = async (req, res) => {
         httpOnly: true,
         maxAge: 24 * 60 * 60 * 1000,
         withCredentials: true,
-        //secure: true, // only works on https
+        secure: true, // only works on https
       });
 
       console.log({
@@ -67,7 +67,7 @@ export const login = async (req, res) => {
       httpOnly: true,
       maxAge: 24 * 60 * 60 * 1000,
       withCredentials: true,
-      //secure: true, // only works on https
+      secure: true, // only works on https
     });
 
     console.log({
