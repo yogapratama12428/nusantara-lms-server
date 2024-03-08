@@ -31,7 +31,7 @@ const app = express();
 // middleware
 app.use(express.json());
 
-app.set('trust proxy', 1)
+// app.set("trust proxy", 1);
 
 app.use(
   cors({
@@ -42,17 +42,17 @@ app.use(
 
 app.use(helmet());
 
-const allowlist = ['192.168.137.208', '13.126.192.186']
+//const allowlist = ['192.168.137.208', '13.126.192.186']
 
 app.use(
   rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
     limit: 1000, // Limit each IP to 100 requests per `window` (here, per 15 minutes).
-    skip: (req, res) => allowlist.includes(req.ip),
-    validate: {
-      trustProxy: true,
-      xForwardedForHeader: true,
-    },
+    // skip: (req, res) => allowlist.includes(req.ip),
+    // validate: {
+    //   trustProxy: true,
+    //   xForwardedForHeader: true,
+    // },
     handler: function (req, res, next) {
       res.status(429).json({
         message: "Too many requests, please try again later.",
