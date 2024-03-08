@@ -44,7 +44,12 @@ app.use(
   rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
     limit: 1000, // Limit each IP to 100 requests per `window` (here, per 15 minutes).
-    message: "to many requests",
+    headers: true,
+    handler: function (req, res, next) {
+      res.status(429).json({
+        message: "Too many requests, please try again later.",
+      });
+    },
   })
 );
 

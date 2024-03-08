@@ -10,3 +10,7 @@
 
 # 2.3
 1. update version name 
+
+# 2.4
+1. update prisma credentials 
+2. update rate limiter 
