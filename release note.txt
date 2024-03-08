@@ -21,4 +21,7 @@
 
 # 2.5.1
 1. change proxy 
-2. add new properti rate limit
+2. add new properti rate limit 
+
+# 2.5.2 
+1. change property proxy

@@ -38,10 +38,7 @@ app.use(
   })
 );
 
-app.use(helmet({
-  // Mengatur opsi 'trust proxy' ke nilai 'true'
-  trustProxy: true
-}));
+app.use(helmet());
 
 app.use(
   rateLimit({
@@ -50,6 +47,10 @@ app.use(
     headers: true,
     standardHeaders: 'draft-7',
     legacyHeaders: false,
+    validate: {
+      xForwardedForHeader: false,
+      default: true,
+    },
     handler: function (req, res, next) {
       res.status(429).json({
         message: "Too many requests, please try again later.",
