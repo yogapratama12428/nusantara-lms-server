@@ -48,8 +48,8 @@ app.use(
     standardHeaders: 'draft-7',
     legacyHeaders: false,
     validate: {
+      trustProxy: false,
       xForwardedForHeader: false,
-      default: true,
     },
     handler: function (req, res, next) {
       res.status(429).json({
