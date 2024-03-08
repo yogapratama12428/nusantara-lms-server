@@ -14,3 +14,7 @@
 # 2.4
 1. update prisma credentials 
 2. update rate limiter 
+
+# 2.5 
+1. fix trust proxy 
+2. secure cookie
