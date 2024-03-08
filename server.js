@@ -31,6 +31,8 @@ const app = express();
 // middleware
 app.use(express.json());
 
+app.set('trust proxy', true);
+
 app.use(
   cors({
     origin: ["http://localhost:5173", "https://codewithyoga.com"],
