@@ -31,8 +31,6 @@ const app = express();
 // middleware
 app.use(express.json());
 
-app.set('trust proxy', true);
-
 app.use(
   cors({
     origin: ["http://localhost:5173", "https://codewithyoga.com"],
@@ -40,13 +38,18 @@ app.use(
   })
 );
 
-app.use(helmet());
+app.use(helmet({
+  // Mengatur opsi 'trust proxy' ke nilai 'true'
+  trustProxy: true
+}));
 
 app.use(
   rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
     limit: 1000, // Limit each IP to 100 requests per `window` (here, per 15 minutes).
     headers: true,
+    standardHeaders: 'draft-7',
+    legacyHeaders: false,
     handler: function (req, res, next) {
       res.status(429).json({
         message: "Too many requests, please try again later.",

@@ -18,3 +18,7 @@
 # 2.5 
 1. fix trust proxy 
 2. secure cookie
+
+# 2.5.1
+1. change proxy 
+2. add new properti rate limit
