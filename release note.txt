@@ -28,3 +28,6 @@
 
 # 2.6
 1. fix buf decoded
+
+# 2.7
+1. fix wrong id in verifyadmin

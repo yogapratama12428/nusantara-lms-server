@@ -29,7 +29,7 @@ export const verifyAdmin = async (req, res, next) => {
       req.userId = decoded.userId;
     });
 
-    if (req.email !== process.env.UID_ADMIN)
+    if (req.userId !== process.env.UID_ADMIN)
       return res
         .status(401)
         .send("Access denied... Credentials Error...You_are_not_admin");
