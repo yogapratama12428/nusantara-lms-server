@@ -34,6 +34,30 @@ export const getChapterById = async (req, res) => {
   }
 };
 
+export const getChapterByIdByAdmin = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const response = await prisma.chapter.findUnique({
+      where: {
+        id,
+      },
+      include: {
+        vidios: {
+          select: {
+            id: true,
+            title: true,
+            time: true,
+            url: true,
+          },
+        },
+      },
+    });
+    res.status(200).json(response);
+  } catch (error) {
+    res.status(404).json({ msg: error.message });
+  }
+};
+
 export const createChapter = async (req, res) => {
   const { title, courseId, position } = req.body;
   try {
