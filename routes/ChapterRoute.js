@@ -7,6 +7,7 @@ import {
   deleteProgress,
   getChapter,
   getChapterById,
+  getChapterByIdAdvence,
   getChapterByIdByAdmin,
   getChapterProgressById,
   getChapterProgressQuestionById,
@@ -22,7 +23,13 @@ const router = express.Router();
 
 router.get("/api/v1/chapter", verifyAdmin, verifyToken, getChapter);
 router.get("/api/v1/chapter/:id", verifyToken, getChapterById);
-router.get("/api/v1/chapter/:id/admin", verifyToken, verifyAdmin, getChapterByIdByAdmin);
+router.get("/api/v1/chapter/:id/advence", verifyToken, getChapterByIdAdvence);
+router.get(
+  "/api/v1/chapter/:id/admin",
+  verifyToken,
+  verifyAdmin,
+  getChapterByIdByAdmin
+);
 router.post("/api/v1/chapter", verifyAdmin, verifyToken, createChapter);
 router.put("/api/v1/chapter/:id", verifyAdmin, verifyToken, updateChapter);
 router.delete("/api/v1/chapter/:id", verifyAdmin, verifyToken, deleteChapter);

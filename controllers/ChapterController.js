@@ -25,6 +25,36 @@ export const getChapterById = async (req, res) => {
             title: true,
             time: true,
           },
+          orderBy: {
+            createdAt: "asc",
+          },
+        },
+      },
+    });
+    res.status(200).json(response);
+  } catch (error) {
+    res.status(404).json({ msg: error.message });
+  }
+};
+
+export const getChapterByIdAdvence = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const response = await prisma.chapter.findUnique({
+      where: {
+        id,
+      },
+      include: {
+        vidios: {
+          select: {
+            id: true,
+            title: true,
+            time: true,
+          },
+          orderBy: {
+            createdAt: "asc",
+          },
+          take: 1,
         },
       },
     });
@@ -48,6 +78,9 @@ export const getChapterByIdByAdmin = async (req, res) => {
             title: true,
             time: true,
             url: true,
+          },
+          orderBy: {
+            createdAt: "asc",
           },
         },
       },
