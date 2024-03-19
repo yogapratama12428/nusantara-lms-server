@@ -4,6 +4,7 @@ import {
   deletedCourse,
   getCourse,
   getCourseById,
+  getCourseByIdTested,
   getCourseLearnById,
   reOrderChapter,
   updateCategoryCourse,
@@ -21,6 +22,8 @@ const router = express.Router();
 router.get("/api/v1/course", getCourse);
 
 router.get("/api/v1/course/:id", getCourseById);
+
+router.get("/api/v1/course/:id/tested", getCourseByIdTested);
 
 router.get(
   "/api/v1/course/learn/:userId/:courseId",

@@ -92,7 +92,7 @@ export const getChapterByIdByAdmin = async (req, res) => {
 };
 
 export const createChapter = async (req, res) => {
-  const { title, courseId, position } = req.body;
+  const { title, courseId } = req.body;
   try {
     const lastChapter = await prisma.chapter.findFirst({
       where: {

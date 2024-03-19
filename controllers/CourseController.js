@@ -28,9 +28,10 @@ export const getCourseById = async (req, res) => {
       include: {
         chapters: {
           orderBy: {
-            createdAt: "asc",
+            position: "asc",
           },
           select: {
+            position: true,
             id: true,
             title: true,
             isPublished: true,
@@ -57,6 +58,51 @@ export const getCourseById = async (req, res) => {
     );
 
     res.status(200).json(generateresponse);
+  } catch (error) {
+    res.status(404).json({ msg: error.message });
+  }
+};
+
+export const getCourseByIdTested = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const response = await prisma.course.findUnique({
+      where: {
+        id: id,
+      },
+      include: {
+        chapters: {
+          orderBy: {
+            createdAt: "asc",
+          },
+          select: {
+            position: true,
+            id: true,
+            title: true,
+            isPublished: true,
+            isFree: true,
+            vidios: {
+              select: {
+                id: true,
+                title: true,
+                time: true,
+              },
+            },
+          },
+        },
+        attachments: true,
+        captures: true,
+        points: true,
+        tools: true,
+      },
+    });
+
+    // const generateresponse = jwt.sign(
+    //   { response },
+    //   process.env.ACCESS_TOKEN_SECRET
+    // );
+
+    res.status(200).json(response);
   } catch (error) {
     res.status(404).json({ msg: error.message });
   }
