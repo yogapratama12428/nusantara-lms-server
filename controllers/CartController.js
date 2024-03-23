@@ -28,7 +28,7 @@ export const getCartById = async (req, res) => {
 };
 
 export const createCart = async (req, res) => {
-  const { userId, courseId, imageUrl, title } = req.body;
+  const { userId, courseId, imageUrl, title, email } = req.body;
 
   const { MIDTRANS_SERVERKEY_DEV, MIDTRANS_CLIENTKEY_DEV } = process.env;
 
@@ -55,6 +55,9 @@ export const createCart = async (req, res) => {
       },
       credit_card: {
         secure: true,
+      },
+      customer_details: {
+        email: email,
       },
     };
 

@@ -19,7 +19,7 @@ let cache = apicache.middleware;
 
 const router = express.Router();
 
-router.get("/api/v1/course", getCourse);
+router.get("/api/v1/course", verifyAdmin, verifyToken, getCourse);
 
 router.get("/api/v1/course/:id", getCourseById);
 

@@ -79,7 +79,7 @@ const handleAddCourseToUser = async (order_id) => {
     },
   });
 
-  console.log("checkDuplicate:", isDuplicate);
+  console.log("Course Already Exist:", isDuplicate);
 
   //check duplicate
   if (!isDuplicate) {
@@ -100,6 +100,8 @@ const handleAddCourseToUser = async (order_id) => {
         isPaid: true,
       },
     });
+
+    console.log("Course Already Successfully to Add:", isDuplicate);
   }
 };
 
@@ -116,7 +118,7 @@ export const createPayment = async (req, res) => {
   let transactionStatus = data.transaction_status;
   let fraudStatus = data.fraud_status;
 
-  if (transactionStatus == "capture" || transactionStatus == "settlement") {
+  if (transactionStatus == "capture") {
     if (fraudStatus == "accept") {
       // TODO set transaction status on your database to 'success'
       // and response with 200 OK
@@ -125,6 +127,7 @@ export const createPayment = async (req, res) => {
   } else if (transactionStatus == "settlement") {
     // TODO set transaction status on your database to 'success'
     // and response with 200 OK
+    await handleAddCourseToUser(orderId);
   } else if (
     transactionStatus == "cancel" ||
     transactionStatus == "deny" ||

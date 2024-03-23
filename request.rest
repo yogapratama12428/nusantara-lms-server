@@ -1,3 +1,6 @@
+### user
+GET http://localhost:3000/api/v1/users
+Authorization: Bearer abcdefghjklm
 ###
 POST http://localhost:3000/api/v1/sign-in
 Content-Type: application/json

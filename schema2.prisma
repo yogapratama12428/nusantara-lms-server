@@ -7,22 +7,22 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "mongodb"
   url      = env("DATABASE_URL")
   relationMode = "prisma"
 }
 
 model User {
-  id String @id @default(uuid())
+  id String @id @default(auto()) @map("_id") @db.ObjectId
   userId String @unique
   email String @unique
-  access_token String? @db.Text
+  access_token String? @db.String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
 model Instrument { 
-  id String @id @default(uuid())
+  id String @id @default(auto()) @map("_id") @db.ObjectId
   title String? 
   imageUrl String?
 
@@ -31,20 +31,20 @@ model Instrument {
 }
 
 model Course {
-  id String @id @default(uuid())
+  id String @id @default(auto()) @map("_id") @db.ObjectId
   userId String
-  title String @db.Text
-  description String? @db.Text
-  fulltext String? @db.Text
-  imageUrl String? @db.Text
-  videoUrl String? @db.Text
+  title String @db.String
+  description String? @db.String
+  fulltext String? @db.String
+  imageUrl String? @db.String
+  videoUrl String? @db.String
   isCompleted Boolean? @default(false)
   isPromoted Boolean? @default(false)
   price Float?
   isPublished Boolean @default(false)
   isFree Boolean @default(false)
 
-  categoryId String?
+  categoryId String?  @db.ObjectId
   category Category? @relation(fields: [categoryId], references: [id])
 
   chapters Chapter[]
@@ -63,11 +63,11 @@ model Course {
 
 
 model Assestment {
- id String @id @default(uuid()) 
+ id String @id @default(auto()) @map("_id") @db.ObjectId
  userId String
  nilai Int  
 
- courseId String?
+ courseId String?  @db.ObjectId
  course Course? @relation(fields: [courseId], references: [id], onDelete: Cascade)
 
  @@index([courseId])
@@ -77,7 +77,7 @@ model Assestment {
 
 
 model Certificate { 
-  id String @id @default(uuid())
+  id String @id @default(auto()) @map("_id") @db.ObjectId
   userId String?
   courseId String?
 
@@ -86,7 +86,7 @@ model Certificate {
 }
 
 model Profile {
-  id String @id @default(uuid())
+  id String @id @default(auto()) @map("_id") @db.ObjectId
   name String?
 
   createdAt DateTime @default(now())
@@ -95,11 +95,11 @@ model Profile {
 
 
 model Tool {
-  id String @id @default(uuid())
+  id String @id @default(auto()) @map("_id") @db.ObjectId
   title String?
   imageUrl String?
 
-  courseId String?
+  courseId String?  @db.ObjectId
   course Course? @relation(fields: [courseId], references: [id], onDelete: Cascade)
   
   createdAt DateTime @default(now())
@@ -108,10 +108,9 @@ model Tool {
   @@index([courseId])
 }
 model Point {
-  id String @id @default(uuid())
-  title String?
+  id String @id @default(auto()) @map("_id") @db.ObjectId
 
-  courseId String?
+  courseId String?  @db.ObjectId
   course Course? @relation(fields: [courseId], references: [id], onDelete: Cascade)
   
   createdAt DateTime @default(now())
@@ -121,10 +120,10 @@ model Point {
 }
 
 model Capture {
-  id String @id @default(uuid())
+  id String @id @default(auto()) @map("_id") @db.ObjectId
   url String?
 
-  courseId String?
+  courseId String?  @db.ObjectId
   course Course? @relation(fields: [courseId], references: [id], onDelete: Cascade)
   
   createdAt DateTime @default(now())
@@ -134,17 +133,17 @@ model Capture {
 }
 
 model Category {
-  id String @id @default(uuid())
+  id String @id @default(auto()) @map("_id") @db.ObjectId
   name String @unique
   courses Course[]
 }
 
 model Attachment {
-  id String @id @default(uuid())
+  id String @id @default(auto()) @map("_id") @db.ObjectId
   name String
-  url String @db.Text
+  url String @db.String
 
-  courseId String
+  courseId String  @db.ObjectId
   course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())
@@ -154,18 +153,18 @@ model Attachment {
 }
 
 model Chapter {
-  id String @id @default(uuid())
+  id String @id @default(auto()) @map("_id") @db.ObjectId
   title String
-  description String? @db.Text
-  fulltext String? @db.Text
-  videoUrl String? @db.Text
+  description String? @db.String
+  fulltext String? @db.String
+  videoUrl String? @db.String
   duration Int?
   
   position Int
   isPublished Boolean @default(false)
   isFree Boolean @default(false)
 
-  courseId String 
+  courseId String  @db.ObjectId
   course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
 
   vidios Vidio[]
@@ -178,11 +177,11 @@ model Chapter {
 }
 
 model QuestionChapter{
-  id String @id @default(uuid())
+  id String @id @default(auto()) @map("_id") @db.ObjectId
   question String?
   answer String?
 
-  chapterId String?
+  chapterId String?  @db.ObjectId
   chapter Chapter? @relation(fields: [chapterId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())
@@ -192,13 +191,13 @@ model QuestionChapter{
 } 
 
 model Vidio {
-  id String @id @default(uuid())
+  id String @id @default(auto()) @map("_id") @db.ObjectId
   title String?
   url String?
   time Int?
   courseId String?
 
-  chapterId String? 
+  chapterId String?  @db.ObjectId
   chapter Chapter? @relation(fields: [chapterId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())
@@ -207,7 +206,7 @@ model Vidio {
   @@index([chapterId])
 }
 model UserProgress {
-  id String @id @default(uuid())
+  id String @id @default(auto()) @map("_id") @db.ObjectId
   userId String?
   courseId String?
   videoId String? @unique
@@ -220,7 +219,7 @@ model UserProgress {
 
 
 model UserProgressQuestion {
-  id String @id @default(uuid())
+  id String @id @default(auto()) @map("_id") @db.ObjectId
   userId String?
   courseId String?
   chapterId String?
@@ -231,30 +230,28 @@ model UserProgressQuestion {
 }
 
 model Purchase {
-  id String @id @default(uuid())
+  id String @id @default(auto()) @map("_id") @db.ObjectId
   userId String
   isCompleted Boolean? @default(false)
   progressCourse Int? @default(0)
 
-  courseId String?
+  courseId String?  @db.ObjectId
   courses Course? @relation(fields: [courseId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt()
 
-  @@index([courseId])
-  @@unique([courseId])
 }
 
 model Cart {
-  id String @id @default(uuid())
+  id String @id @default(auto()) @map("_id") @db.ObjectId
   userId String? 
   courseId String? 
   orderId String?
   imageUrl String?
   title String?
-  checkoutToken String? @db.Text
-  checkoutlink String? @db.Text
+  checkoutToken String? @db.String
+  checkoutlink String? @db.String
   price Int?
   isPaid Boolean?
   
